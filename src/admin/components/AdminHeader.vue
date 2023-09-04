@@ -9,25 +9,18 @@
                 <div>
                     <ul>
                         <li enter-active-class="active" v-for="(item, index) in listMenu" :key="index"> 
-                            <router-link :to="item.path" class="listMenu">{{item.name}}</router-link>
+                            <component :is="item.icon"/>
+
+                            <router-link :to="item.path" class="listMenu">
+                               
+                               
+                                {{item.name}}
+                            </router-link>
                         </li>
                     </ul>
                 </div>
             </div>
     
-            <div class="container-right">
-                <div class="search">
-                    <a-input-search v-model:value="value" placeholder="Tìm tên sản phẩm" enter-button @search="onSearch" class="input-search"/>
-                </div>
-                
-                <div class="profile">
-                    <user-outlined />
-                </div>
-
-                <div class="cart">
-                    <ShoppingCartOutlined/>
-                </div>
-            </div>
         </div>
     </div>
 </template>
@@ -35,23 +28,33 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { ShoppingCartOutlined, UserOutlined} from '@ant-design/icons-vue';
+import { AreaChartOutlined, UnorderedListOutlined, SolutionOutlined, BookOutlined } from '@ant-design/icons-vue';
 
 const value = ref < string > ('');
 
-let listMenu = [{
+let listMenu = [
+    {
+        name: 'Thống kê',
+        path: '/admin',
+        icon: 'AreaChartOutlined'
+    },
+
+    {
         name: 'Sản Phẩm',
-        path: "/admin"
+        path: '/admin/product',
+        icon: 'UnorderedListOutlined'
     },
 
     {
         name: 'Người dùng',
-        path: '/admin/user'
+        path: '/admin/user',
+        icon: 'SolutionOutlined'
     },
 
     {
         name: 'Bài viết',
-        path: "/admin/blog"
+        path: '/admin/blog',
+        icon: 'BookOutlined'
     },
 
 ]
@@ -63,73 +66,62 @@ const onSearch = (searchValue: string) => {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Chokokutai&family=Poppins:wght@200;400&display=swap');
 :root {
     --text-font-family: 'Chokokutai', cursive;
 }
 
 .constainer {
-    width: 100%;
-    background-color: #eeee;
+    width: 240px;
+    height: 100vh;
+    text-align: center;
+    background-color: #3c5398;
     font-size: 24px;
     .header {
+        text-align: center;
         .conatiner-left {
-            display: flex;
-            align-items: center;
             .logo-header {
-                font-family: var(--text-font-family);
+                margin: 0 auto;
+                
             }
         }
-        .container-right {
-            display: flex;
-            width: 500px;
-            // max-width: 500px;
-            justify-content: space-around;
-
-            .search {
-                .input-search {
-                    width: 400px;
-                }
-            }
-
-
-            .cart {
-                color: #000;
-                cursor: pointer;
-            }
-
-            .profile {
-                cursor: pointer;
-            }
-        }
+        
         .logo-header {
             text-transform: uppercase;
-            color: #000;
+            color: #eeee;
             margin-right: 80px;
+            border-bottom: 1px solid #000;
+            padding: 30px 0;
+            font-family: var(--text-font-family);
         }
         margin: 0 auto;
-        padding: 30px 0;
-        display: flex;
-        justify-content: space-between;
-        max-width: 1440px;
         ul {
-            display: flex;
+            
             li {
                 list-style-type: none;
                 cursor: pointer;
-                text-transform: uppercase;
+                text-transform: capitalize;
+                
                 font-size: 20px;
-                margin: 0 15px;
+                margin: 15px 0;
                 font-family: 'Poppins', sans-serif;
-                color: #000;
+                
                 &:hover {
                     color: #40BFFF;
                 }
 
                 .listMenu {
-                    color: #000;
+                    color: #ccc;
                     text-decoration: none;
+                    font-size: 16px;
+                }
+
+                a {
+                    margin: 15px 0;
+                    &:hover {
+                        color: #40BFFF;
+                    }
                 }
             }
 

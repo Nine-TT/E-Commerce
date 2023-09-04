@@ -5,6 +5,9 @@ import Product from "../user/components/Product.vue";
 import ManagerUser from "../admin/components/ManagerUser.vue"
 import ManagerProduct from "../admin/components/ManagerProduct.vue"
 import ManagerBlog from "../admin/components/ManagerBlog.vue"
+import Dashboard from "../admin/components/Dashboard.vue"
+import Blog from "../user/components/Blog.vue"
+import Contact from "../user/components/Contact.vue"
 
 
 
@@ -17,6 +20,17 @@ const routes = [
                 path: "/product",
                 component: Product
             },
+
+            {
+                path: "/blog",
+                component: Blog
+            },
+
+            {
+                path: "/contact",
+                component: Contact
+            },
+
         ]
     },
 
@@ -33,6 +47,11 @@ const routes = [
 
             {
                 path: "",
+                component: Dashboard
+            },
+
+            {
+                path: "product",
                 component: ManagerProduct
             },
 
@@ -48,6 +67,7 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes,
+    linkActiveClass: "active_navbar"
 })
 
 export default router

@@ -2,14 +2,15 @@
     <div class="constainer">
         <div class="header">
             <div class="conatiner-left">
-                <div class="logo-header">
-                    ttc store
+                <div class="logo-header" @click="redirectToHome">
+
+                    Hekto
                 </div>
     
-                <div>
+                <div class="navbar_menu">
                     <ul>
-                        <li enter-active-class="active" v-for="(item, index) in listMenu" :key="index"> 
-                            <router-link :to="item.path" class="listMenu">{{item.name}}</router-link>
+                        <li  v-for="(item, index) in listMenu" :key="index" class="router_container"> 
+                            <router-link  :to="item.path"  exactActiveClass="active_navbar" >{{item.name}}</router-link>
                         </li>
                     </ul>
                 </div>
@@ -33,11 +34,11 @@
 </template>
 
 
-<script lang="ts" setup>
+<script setup>
 import { ref } from 'vue';
-import { ShoppingCartOutlined, UserOutlined} from '@ant-design/icons-vue';
+import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons-vue';
 
-const value = ref < string > ('');
+const value = ref('');
 
 let listMenu = [{
         name: 'Trang chủ',
@@ -61,29 +62,57 @@ let listMenu = [{
     }
 ]
 
-const onSearch = (searchValue: string) => {
+const onSearch = () => {
     console.log('use value', searchValue);
     console.log('or use this.value', value.value);
-    value.value = '';
+    this.value.value = '';
 };
+
+
+const redirectToHome = () => {
+    alert("click oke")
+   this.$router.push({path: '/'});
+}
+
 </script>
 
-<style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Chokokutai&family=Poppins:wght@200;400&display=swap');
+<style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;600&display=swap');
 :root {
-    --text-font-family: 'Chokokutai', cursive;
+    --text-header-font: 'Josefin Sans', sans-serif;
+    --text-header-color: #0D0E43;
+}
+
+.router_container a {
+    color: #000;
+}
+
+.router_container a:hover {
+    color: #FB2E86;
+    opacity: .5;
 }
 
 .constainer {
     width: 100%;
     background-color: #eeee;
     font-size: 24px;
+
+    .active_navbar {
+        color: #FB2E86;
+    }
     .header {
         .conatiner-left {
             display: flex;
             align-items: center;
             .logo-header {
-                font-family: var(--text-font-family);
+                font-family:  'Josefin Sans', sans-serif;
+                --text-header-color: #0D0E43;
+                margin-right: 80px;
+                font-size: 44px;
+                color: var(--text-header-color);
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
         .container-right {
@@ -108,11 +137,7 @@ const onSearch = (searchValue: string) => {
                 cursor: pointer;
             }
         }
-        .logo-header {
-            text-transform: uppercase;
-            color: #000;
-            margin-right: 80px;
-        }
+        
         margin: 0 auto;
         padding: 30px 0;
         display: flex;
@@ -126,27 +151,32 @@ const onSearch = (searchValue: string) => {
                 text-transform: uppercase;
                 font-size: 20px;
                 margin: 0 15px;
-                font-family: 'Poppins', sans-serif;
+                font-family:  'Josefin Sans', sans-serif;
                 color: #000;
                 &:hover {
-                    color: #40BFFF;
+                    color: #FB2E86;
                 }
 
-                .listMenu {
-                    color: #000;
+                a {
                     text-decoration: none;
                 }
             }
 
-            .active {
-                color: #40BFFF;
-            }
+            
         }
     }
 }
 
 @media (min-width:320px) {
     /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+    .constainer .header .container-right {
+        display: none;
+    }
+
+    .navbar_menu {
+        display: none;
+    }
+
 }
 
 @media (min-width:480px) {
