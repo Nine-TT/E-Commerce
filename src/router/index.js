@@ -1,42 +1,48 @@
 import { createRouter, createWebHistory } from "vue-router"
-
+import AdminView from "../admin/view/AdminView.vue"
+import UserView  from "../user/views/UserView.vue";
+import Product from "../user/components/Product.vue";
+import ManagerUser from "../admin/components/ManagerUser.vue"
+import ManagerProduct from "../admin/components/ManagerProduct.vue"
+import ManagerBlog from "../admin/components/ManagerBlog.vue"
 
 
 
 const routes = [
-    // {
-    //     path: "/",
-    //     name: "home-page",
-    //     component: Home
-    // },
+    {
+        path: "/",
+        component: UserView,
+        children: [
+            {
+                path: "/product",
+                component: Product
+            },
+        ]
+    },
 
-    // {
-    //     path: "/login",
-    //     component: Login
-    // },
+    
 
-    // {
-    //     path: "/about",
-    //     component: About
-    // },
+    {
+        path: "/admin",
+        component: AdminView ,
+        children: [
+            {
+                path: "user",
+                component: ManagerUser
+            },
 
-    // // Dynamic - params
-    // {
-    //     path: "/work/:id",
-    //     component: Work
-    // },
+            {
+                path: "",
+                component: ManagerProduct
+            },
 
-    // // redirect 
-    // {
-    //     path: "/home",
-    //     redirect: "/"
-    // },
+            {
+                path: "blog",
+                component: ManagerBlog
+            }
+        ]
+    },
 
-    // {
-    //     path: '/:pathMatch(.*)*',
-    //     name: 'NotFound',
-    //     component: NotFound
-    // }
 ]
 
 const router = createRouter({

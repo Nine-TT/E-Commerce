@@ -8,7 +8,9 @@
     
                 <div>
                     <ul>
-                        <li enter-active-class="active" v-for="(item, index) in listMenu" :key="index"> {{item.name}}</li>
+                        <li enter-active-class="active" v-for="(item, index) in listMenu" :key="index"> 
+                            <router-link :to="item.path" class="listMenu">{{item.name}}</router-link>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -38,25 +40,20 @@ import { ShoppingCartOutlined, UserOutlined} from '@ant-design/icons-vue';
 const value = ref < string > ('');
 
 let listMenu = [{
-        name: 'Trang chủ',
-        path: "/"
+        name: 'Sản Phẩm',
+        path: "/admin"
     },
 
     {
-        name: 'Sản phẩm',
-        path: '/product'
+        name: 'Người dùng',
+        path: '/admin/user'
     },
 
     {
         name: 'Bài viết',
-        path: "/blog"
+        path: "/admin/blog"
     },
 
-    {
-        name: 'Liên hệ',
-        path: '/contact'
-
-    }
 ]
 
 const onSearch = (searchValue: string) => {
@@ -125,8 +122,14 @@ const onSearch = (searchValue: string) => {
                 font-size: 20px;
                 margin: 0 15px;
                 font-family: 'Poppins', sans-serif;
+                color: #000;
                 &:hover {
                     color: #40BFFF;
+                }
+
+                .listMenu {
+                    color: #000;
+                    text-decoration: none;
                 }
             }
 
